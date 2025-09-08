@@ -1,0 +1,43 @@
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+}
+
+/* Cadre blanc autour de la vidéo */
+.video-wrapper {
+    border: 5px solid #fff;
+    display: inline-block;
+    padding: 5px;
+}
+
+/* Compte à rebours plus bas */
+#countdown {
+    font-size: 2em;
+    margin-top: 30px;
+}
+
+/* Bouton bien en dessous */
+button {
+    padding: 10px 20px;
+    font-size: 18px;
+    margin-top: 20px;
+    cursor: pointer;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    border-radius: 5px;
+}
+button:hover {
+    background-color: #ddd;
+}

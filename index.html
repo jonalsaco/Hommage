@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Hommage</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Fenêtre modale */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      pointer-events: none;
+    }
+
+    .modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: #111;
+      padding: 20px;
+      border: 2px solid white;
+      border-radius: 10px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.5);
+      animation: fadeInUp 1s ease;
+    }
+
+    .modal-content p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+
+    .modal-content button {
+      padding: 10px 20px;
+      background: white;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .modal-content button:hover {
+      background: #ccc;
+    }
+
+    /* Animation du contenu */
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    /* Cadre de la vidéo */
+    .video-frame {
+      display: inline-block;
+      border: 3px solid white;
+      padding: 5px;
+      margin-top: 40px;
+    }
+
+    /* Timer et bouton */
+    #countdown {
+      margin-top: 50px;
+      font-size: 1.5em;
+    }
+
+    #nextBtn {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: white;
+      color: black;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+      display: none;
+    }
+
+    #nextBtn:hover {
+      background: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <!-- Fenêtre modale -->
+  <div class="modal" id="introModal">
+    <div class="modal-content">
+      <p>
+        Ceci est un mini ARG amateur.<br>
+        Tout n'est pas parfait et des défauts sont visibles,<br>
+        mais cela ne change rien à l'histoire ni à l'expérience proposée.<br>
+	Même si tout ceci est inspiré de fait et de témoignage réel, les personnages ext...<br>
+	sont fictifs.<br><br>
+        Je vous souhaite une bonne découverte.
+      </p>
+      <button onclick="closeModal()">Continuer</button>
+    </div>
+  </div>
+
+  <!-- Contenu de ta page principale -->
+  <div class="container">
+    <div class="video-frame">
+  <iframe width="560" height="315" 
+          src="https://www.youtube.com/embed/YO-U6x-UaCM" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+  </iframe>
+</div>
+    <div id="countdown"></div>
+    <button id="nextBtn" onclick="location.href='page2.html'">Continuer</button>
+  </div>
+
+ <script>
+  // Affiche la fenêtre avec un effet fade-in
+  window.onload = () => {
+    document.getElementById("introModal").classList.add("show");
+  };
+
+  // Ferme la fenêtre avec fade-out
+  function closeModal() {
+    const modal = document.getElementById("introModal");
+    modal.classList.remove("show");
+    setTimeout(() => {
+      modal.style.display = "none";
+    }, 800); // durée du fade-out
+  }
+
+  // Compte à rebours (1 heure = 3600 secondes)
+  let timeLeft = 3600;
+  const countdownEl = document.getElementById("countdown");
+  const nextBtn = document.getElementById("nextBtn");
+
+  function updateCountdown() {
+    let minutes = Math.floor(timeLeft / 60);
+    let seconds = timeLeft % 60;
+    countdownEl.innerHTML = minutes + "m " + (seconds < 10 ? "0" : "") + seconds + "s restantes";
+
+    timeLeft--;
+    if (timeLeft < 0) {
+      clearInterval(timer);
+      countdownEl.style.display = "none";
+      nextBtn.style.display = "block";
+    }
+  }
+
+  let timer = setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
+</body>
+</html>
